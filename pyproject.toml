@@ -1,0 +1,51 @@
+[project]
+name = "ragl"
+dynamic = ["version"]
+dependencies = [
+    "qdrant-client>=1.12.1",
+    "streamlit>=1.40.2",
+    "langchain-ollama>=0.2.0",
+    "langchain>=0.3.9",
+    "langchain-community>=0.3.8",
+    "ragl @ file:///${PROJECT_ROOT}/",
+    "pypdf>=5.1.0",
+    "langchain-qdrant>=0.2.0",
+]
+requires-python = "==3.11.*"
+readme = "README.md"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "PD901",  # pandas-df-variable-name
+    "TRY003", # raise-vanilla-args
+    "ANN003", # missing-type-kwargs
+    "COM812", # missing-trailing-comma
+    "D107",   # undocumented-public-init
+    "D105",   # undocumented-magic-method
+    "D104",   # undocumented-public-package
+    "FIX002", # line-contains-todo
+    "TD003",  # missing-todo-link
+    "S104",   # binding to all interfaces
+    "S101",   # Assert detected
+]
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.version]
+source = "scm"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "-e file:///${PROJECT_ROOT}/#egg=ragl",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8.1",
+]
